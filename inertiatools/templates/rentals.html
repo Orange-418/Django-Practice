@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Rentals</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Street Name</th>
+            <th>Number</th>
+            <th>Unit</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for property in properties %}
+            <tr>
+                <td>{{ property.property_street_name }}</td>
+                <td>{{ property.property_number }}</td>
+                <td>{{ property.unit_number }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+    <a href="{% url 'create-rental' %}" class="button">Add New Rental</a>
+
+{% endblock %}

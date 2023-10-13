@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Tenant List</h1>
+
+<a href="/new-tenant/">New Tenant</a>  <!-- "New Tenant" button -->
+
+<ul>
+    {% for tenant in tenants %}
+        <li><a href="/tenant/{{ tenant.id }}/edit/">{{ tenant.first_name }} {{ tenant.last_name }}</a></li>  <!-- link to edit page for tenant -->
+    {% endfor %}
+</ul>
+
+
+
+{% endblock %}

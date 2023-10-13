@@ -1,0 +1,7 @@
+<h1>Edit Tenant</h1>
+
+<form method="post" action="{% url 'tenant_edit' tenant.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save Changes">
+</form>

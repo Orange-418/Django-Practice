@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div id="tenant-selection-formset">
+        {{ tenant_selection_formset.management_form }}
+        {% for form in tenant_selection_formset %}
+        <div class="form-group">
+            {{ form.tenant }}
+            {% if forloop.last %}
+            <a id="add-another-tenant" href="#">Add another tenant</a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!-- This is the empty form that will be used as a template for adding new tenant selection forms. -->
+<!-- It's hidden from the user and only used for the JavaScript to clone and append to the formset. -->
+<div id="empty-form" style="display:none;">
+    <div class="form-group">
+        {{ tenant_selection_formset.empty_form.tenant }}
+    </div>
+</div>
+
+
+    {{ tenant_selection_formset.media }}
+    <script>
+        $(document).ready(function() {
+            // Add a new tenant selection form when the "add another tenant" link is clicked
+            $('#add-another-tenant').click(function(e) {
+                e.preventDefault();
+                $('#tenant-selection-formset').append($('#empty-form').html().replace(/__prefix__/g, '{{ tenant_selection_formset.form.id }}'));
+            });
+        });
+    </script>
+
+{% endblock %}

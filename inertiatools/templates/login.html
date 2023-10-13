@@ -1,0 +1,53 @@
+<!-- login.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <style>
+    .panel-heading {
+      font-size: 48px;
+      margin-bottom:20px;
+    }
+  </style>
+  <style>
+    .btn-success {
+      margin-top:20px;
+      background-color: rgb(61,61,61);
+      border: none;
+    }
+    .btn-success:hover {
+      background-color: rgb(170,170,170);
+    }
+  </style>
+  <div class="container">
+      <form action="{% url 'login' %}" method="post">
+          {% csrf_token %}
+          <div class="col-md-8 col-md-offset-2">
+              <div class="panel panel-default">
+                  <div class="panel-heading">Log in</div>
+                  <div class="panel-body">
+                      <!-- Display an error message if one exists -->
+                      {% if error_message %}
+                          <p class="bg-danger p-d ml-b">{{ error_message }}</p>
+                      {% endif %}
+
+                      <div class="form-group clearfix">
+                          <label for="username" class="col-md-4 control-label text-right">Username<span class="text-red">*</span>:</label>
+                          <div class="col-md-6">
+                              <input type="text" name="username" class="form-control" required>
+                          </div>
+                      </div>
+                      <div class="form-group clearfix">
+                          <label for="password" class="col-md-4 control-label text-right">Password<span class="text-red">*</span>:</label>
+                          <div class="col-md-6">
+                              <input type="password" name="user_password" class="form-control" required>
+                          </div>
+                      </div>
+                      <div class="col-md-6 col-md-offset-4">
+                          <input type="submit" value="Log in" class="btn btn-success">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </form>
+  </div>
+{% endblock %}
